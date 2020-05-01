@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        benchtest: [short_sample, short_dropshot, full_rumble, oce_rlcs, oce_rlcs_intensive]
+        benchtest: [short_sample, short_dropshot]
 
     steps:
     - uses: actions/checkout@v2
@@ -43,7 +43,7 @@ jobs:
     - name: Run benchmark.
       run: |
         cd carball/tests/benchmarking
-        pytest benchmarking.py::'test_${{matrix.bechtest}}' --benchmark-json carball_benchmarking.json
+        pytest benchmarking.py::test_${{matrix.bechtest}} --benchmark-json carball_benchmarking.json
 
     # REQUIRES gh-pages BRANCH IN THE MAIN REPO (for the graphs).
     - name: Process and store benchmark ${{matrix.bechtest}}.
