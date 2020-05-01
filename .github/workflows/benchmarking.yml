@@ -26,8 +26,8 @@ jobs:
     - name: Install dependencies.
       run: pip install -r requirements.txt && pip install -r requirements-test.txt
 
-    - name: Initialise.
-      run: python init.py
+#    - name: Initialise.
+#      run: python init.py
 
     - name: Prepare benchmark.
       run: |
