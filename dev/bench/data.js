@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1588332233656,
+  "lastUpdate": 1588332347991,
   "repoUrl": "https://github.com/DivvyCr/carball",
   "entries": {
     "Python Benchmark": [
@@ -62,6 +62,37 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.0004778214049077342",
             "extra": "mean: 4.079612542735073 msec\nrounds: 234"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "divvycr@gmail.com",
+            "name": "DivvyCr",
+            "username": "DivvyCr"
+          },
+          "committer": {
+            "email": "divvycr@gmail.com",
+            "name": "DivvyCr",
+            "username": "DivvyCr"
+          },
+          "distinct": true,
+          "id": "1d9fff0f968b9d8dde7263f6d6abf3b52c763b86",
+          "message": "100",
+          "timestamp": "2020-05-01T12:23:23+01:00",
+          "tree_id": "557ba8202eb8a8cd7c525ac53caadff00086ecd8",
+          "url": "https://github.com/DivvyCr/carball/commit/1d9fff0f968b9d8dde7263f6d6abf3b52c763b86"
+        },
+        "date": 1588332340773,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "benching.py::test_bench",
+            "value": 2599.5291104213993,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00003685154645110683",
+            "extra": "mean: 384.6850554552528 usec\nrounds: 2218"
           }
         ]
       }
