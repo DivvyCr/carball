@@ -39,7 +39,8 @@ jobs:
 
     - name: Run benchmark.
       run: |
-        pytest benching.py --benchmark-json bench_output.json
+        cd carball/tests/benchmarking
+        pytest benchmarking.py --benchmark-json bench_output.json
 
     - name: Store benchmark result
       uses: rhysd/github-action-benchmark@v1
