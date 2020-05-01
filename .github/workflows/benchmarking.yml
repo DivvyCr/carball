@@ -2,7 +2,7 @@ name: Benchmarking
 
 on:
   push:
-    branches: [ master, div-tests ]
+    branches: [ div-tests ]
 
 jobs:
   build:
