@@ -20,14 +20,14 @@ jobs:
         python -m pip install --upgrade pip &&
         pip install wheel
 
-#    - name: Set-up and install protobuf.
-#      run: chmod 777 ./_travis/install-protoc.sh && ./_travis/install-protoc.sh 2.6.1
+    - name: Set-up and install protobuf.
+      run: chmod 777 ./_travis/install-protoc.sh && ./_travis/install-protoc.sh 2.6.1
 
     - name: Install dependencies.
       run: pip install -r requirements.txt && pip install -r requirements-test.txt
 
-#    - name: Initialise.
-#      run: python init.py
+    - name: Initialise.
+      run: python init.py
 
     - name: Prepare benchmark.
       run: |
