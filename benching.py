@@ -2,7 +2,7 @@ import pytest
 
 
 def func():
-    for i in range(10000):
+    for i in range(1000):
         print("|",end="")
 
 
