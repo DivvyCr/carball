@@ -49,7 +49,7 @@ jobs:
     - name: Process and store benchmark ${{matrix.benchtest}}.
       uses: rhysd/github-action-benchmark@v1
       with:
-        name: Carball Benchmarks ${{matrix.benchtest}}
+        name: Carball Benchmark - ${{matrix.benchtest}}
         tool: 'pytest'
         output-file-path: carball/tests/benchmarking/carball_benchmarking.json
         benchmark-data-dir-path: dev/bench/${{matrix.benchtest}}/
