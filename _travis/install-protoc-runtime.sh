@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 protoc_version=$1
 
-wget https://github.com/protocolbuffers/protobuf/archive/v${protoc_version}.zip
-unzip v${protoc_version}.zip
-cd v${protoc_version}
+apt-get install autoconf automake libtool curl make g++ unzip
+wget https://github.com/protocolbuffers/protobuf/releases/protobuf-cpp-${protoc_version}.zip
+unzip protobuf-cpp-${protoc_version}.zip
+cd protobuf-cpp-${protoc_version}
 ./configure
 make
 make install
