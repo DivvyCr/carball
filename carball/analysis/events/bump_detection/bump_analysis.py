@@ -42,15 +42,17 @@ class BumpAnalysis:
         frame_number = bump.frame_number
 
     def create_bumps_from_player_contact(self, data_frame, player_map):
+        print("Entered.")
         # NOTES:
         #   Contact is not guaranteed (but most likely).
-        #   Attacker/Victim is not determined.
+        #   [WIP] Attacker/Victim is not (yet) determined.
 
         # Get an array of player names to use for player combinations.
         player_names = []
         for player in player_map.values():
             player_names.append(player.name)
 
+        bumps = []
         # For each player pair combination, get possible contact distances.
         for player_pair in itertools.combinations(player_names, 2):
             p1_pos_df = data_frame[str(player_pair[0])][['pos_x', 'pos_y', 'pos_z']].dropna(axis=0)
@@ -68,28 +70,35 @@ class BumpAnalysis:
             players_close_single_frame_idxs = BumpAnalysis.filter_consecutive_idxs(players_close_frame_idxs)
 
             for possible_bump_frame_idx in players_close_single_frame_idxs:
-
                 # Calculate bump alignments both ways.
                 p1_bump_ang = BumpAnalysis.get_player_bump_alignment(data_frame, possible_bump_frame_idx,
                                                                      player_pair[0], player_pair[1])
                 p2_bump_ang = BumpAnalysis.get_player_bump_alignment(data_frame, possible_bump_frame_idx,
                                                                      player_pair[1], player_pair[0])
 
-                if p1_bump_ang < 30:
-                    print(data_frame.game.seconds_remaining.loc[possible_bump_frame_idx])
-                    print(" > " + player_pair[0] + " on " + player_pair[1])
+                if p1_bump_ang < 45:
+                    s_rem = data_frame.game.seconds_remaining.loc[possible_bump_frame_idx]
+                    if data_frame.game.is_overtime.loc[possible_bump_frame_idx] is None:
+                        s_rem = s_rem * (-1)
+                    bump = (int(s_rem), str(player_pair[0]), str(player_pair[1]))
+                    bumps.append(bump)
 
-                if p2_bump_ang < 30:
-                    print(data_frame.game.seconds_remaining.loc[possible_bump_frame_idx])
-                    print(" > " + player_pair[1] + " on " + player_pair[0])
+                if p2_bump_ang < 45:
+                    s_rem = data_frame.game.seconds_remaining.loc[possible_bump_frame_idx]
+                    if data_frame.game.is_overtime.loc[possible_bump_frame_idx] is None:
+                        s_rem = s_rem * (-1)
+                    bump = (int(s_rem), str(player_pair[1]), str(player_pair[0]))
+                    bumps.append(bump)
 
-                # ang_diff = abs(p1_bump_ang - p2_bump_ang)
-                # if ang_diff > 90:
-                #     print(" > PRIORITY 1")
-                # elif ang_diff > 60:
-                #     print(" >> Priority 2")
-                # elif ang_diff > 30:
-                #     print(" >>> Priority 3")
+        for bump in sorted(bumps):
+            # if bump[0] < 0:
+            #     min_rem = np.ceil(bump[0] / 60)
+            # else:
+            #     min_rem = np.floor(bump[0] / 60)
+            # sec_rem = bump[0] % 60
+            # print(str(int(min_rem)) + ":" + str(int(sec_rem)).zfill(2))
+            print(str(int(bump[0])))
+            print("   " + str(bump[1] + " > " + str(bump[2])))
 
     @staticmethod
     def filter_consecutive_idxs(players_close_frame_idxs):
